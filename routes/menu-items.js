@@ -10,7 +10,8 @@ const ids = [];
 // fecthing data from GoogleSheets and updating database 
 router.get('/', async (req, res) => {
     const auth = new google.auth.GoogleAuth({
-        keyFile: process.env.KEY_FILE,
+        // keyFile: process.env.KEY_FILE,
+        keyFile: "credentials.json",
         scopes: "https://www.googleapis.com/auth/spreadsheets",
     })
 
