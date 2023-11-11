@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 })
  
 
-app.use('/pho-hot', menuItems)
+app.use('/', menuItems)
 
 
 //connecting to mongoDB
