@@ -24,10 +24,10 @@ router.get('/', async (req, res) => {
     const spreadsheetId = process.env.sheetID;
 
     // Get metadeta about spreadsheet
-    const metaData = await googlesheets.spreadsheets.get({
-        auth,
-        spreadsheetId,
-    })
+    // const metaData = await googlesheets.spreadsheets.get({
+    //     auth,
+    //     spreadsheetId,
+    // })
 
     // read rows from spreadsheet
     const getRows = await googlesheets.spreadsheets.values.get({
