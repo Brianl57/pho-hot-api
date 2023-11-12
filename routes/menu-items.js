@@ -34,6 +34,8 @@ router.get('/', async (req, res) => {
         auth, 
         spreadsheetId,
         range: "Sheet1"
+    }).catch(err => {
+        console.log(err)
     })
 
     const menu_items = getRows.data.values;
