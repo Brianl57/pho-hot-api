@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     })
 
     // create client instance for auth 
-    const client = await auth.getClient();
+    const client = await auth.getClient().catch(err => console.log(err))
 
     // create instance of Google sheets api
     const googlesheets =  google.sheets({ version: "v4", auth: client });
