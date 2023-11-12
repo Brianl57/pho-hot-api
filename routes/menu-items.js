@@ -8,15 +8,22 @@ const router = express.Router();
 const ids = [];
 
 // fecthing data from GoogleSheets and updating database 
-router.get('/', async (req, res) => {
+router.get('/', async (req, response) => {
     const auth = new google.auth.GoogleAuth({
         // keyFile: process.env.KEY_FILE,
         keyFile: "credentials.json",
         scopes: "https://www.googleapis.com/auth/spreadsheets",
     })
-
+     
     // create client instance for auth 
-    const client = await auth.getClient().catch(err => console.log(err))
+    const client = await auth.getClient()
+                    .then(res => {
+                        console.log("CLIENT RESPONSE: ", res)
+                    })
+                    .catch(err => {
+                        console.log("CLIENT ERR: ", err)
+                    })
+
 
     // create instance of Google sheets api
     const googlesheets =  google.sheets({ version: "v4", auth: client });
@@ -34,13 +41,16 @@ router.get('/', async (req, res) => {
         auth, 
         spreadsheetId,
         range: "Sheet1"
-    }).catch(err => {
-        console.log(err)
+    })
+        .then(res => {
+            console.log("GETROWS RES: " ,res)
+            const menu_items = res.data.values;
+            response.send(menu_items);
+        })
+        .catch(err => {
+        console.log("GETROWS", err)
     })
 
-    const menu_items = getRows.data.values;
-
-    res.send(menu_items);
 })
 
 
