@@ -6,12 +6,12 @@ const MenuItem = require("../models/menu_itemModel")
 
 const router = express.Router();
 
-const ids = [];
+
 
 var corsOptions = {
-    origin: 'https://pho-hot.onrender.com',
-    optionsSuccessStatus: 200
-}
+        origin: ['https://pho-hot.onrender.com', 'http://localhost:3000'],
+        optionsSuccessStatus: 200
+    }
 
 // fecthing data from GoogleSheets and updating database 
 router.get('/', cors(corsOptions), async (req, response) => {
@@ -23,9 +23,9 @@ router.get('/', cors(corsOptions), async (req, response) => {
      
     // create client instance for auth 
     const client = await auth.getClient()
-                    .then(res => {
-                        console.log("CLIENT RESPONSE: ", res)
-                    })
+                    // .then(res => {
+                    //     console.log("CLIENT RESPONSE: ", res)
+                    // })
                     .catch(err => {
                         console.log("CLIENT ERR: ", err)
                     })
@@ -49,7 +49,7 @@ router.get('/', cors(corsOptions), async (req, response) => {
         range: "Sheet1"
     })
         .then(res => {
-            console.log("GETROWS RES: " ,res)
+            // console.log("GETROWS RES: " ,res)
             const menu_items = res.data.values;
             response.send(menu_items);
         })
