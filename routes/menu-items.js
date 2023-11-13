@@ -9,7 +9,7 @@ const router = express.Router();
 const ids = [];
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://pho-hot.onrender.com',
     optionsSuccessStatus: 200
 }
 
