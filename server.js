@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const menuItems = require('./routes/menu-items');
+const cors = require('cors')
 
 require('dotenv').config();
 
@@ -8,12 +9,12 @@ require('dotenv').config();
 app = express();
 
 
-app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-})
- 
+// app.use((req, res, next) => {
+//     console.log(req.path, req.method);
+//     next();
+// })
 
+// app.use(cors())
 app.use('/pho-hot', menuItems)
 
 

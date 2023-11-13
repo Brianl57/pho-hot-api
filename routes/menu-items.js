@@ -1,5 +1,6 @@
 const express = require('express');
 const { google } = require("googleapis");
+const cors = require('cors')
 const mongoose = require("mongoose");
 const MenuItem = require("../models/menu_itemModel")
 
@@ -7,8 +8,13 @@ const router = express.Router();
 
 const ids = [];
 
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}
+
 // fecthing data from GoogleSheets and updating database 
-router.get('/', async (req, response) => {
+router.get('/', cors(corsOptions), async (req, response) => {
     const auth = new google.auth.GoogleAuth({
         // keyFile: process.env.KEY_FILE,
         keyFile: "credentials.json",
@@ -48,7 +54,7 @@ router.get('/', async (req, response) => {
             response.send(menu_items);
         })
         .catch(err => {
-        console.log("GETROWS", err)
+        console.log("GETROWS ERR: ", err)
     })
 
 })
